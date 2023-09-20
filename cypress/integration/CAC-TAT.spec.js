@@ -14,6 +14,8 @@ describe('Central de Atendimento ao Cliente TAT', function() {
     })
     //Preenche todos os campos obrigatorios
     it('Preencha os campos obrigatorios e envia o formulario', function() {
+
+
         //Pega o campo com o input = firstname e grava o type informado 'Thadeu First'
         cy.get('#firstName').type('Thadeu First')
         //Pega o campo com o input = lastname e grava o type informado 'Thadeu'
@@ -25,10 +27,12 @@ describe('Central de Atendimento ao Cliente TAT', function() {
         //Executa a funcao de Click usando a opcao de Contains onde voce pega o Nome do Button como referencia
         cy.contains('button', 'Enviar').click()
         //Executa a funcao de Click usando a opcao de Get onde pega o button[type=submit} como referencia
-        cy.get('button[type="submit"]').click()
+        //cy.get('button[type="submit"]').click()
         
         //Verifica se apos o preenchimento e o click no botao, se foi retornado uma class de Sucesso.
         cy.get('.success').should('be.visible')
+        
+        cy.get('.success').should('not.be.visible')
     })
 
     it('Verifica se o campo email e valido', function() {
@@ -161,5 +165,30 @@ cy.excheckconfirmafeedback()
      it('acessa a página da política de privacidade removendo o target e então clicando no link', function(){
      cy.novabacomclick()
       })
+
+      //Usando a funcao clock e tick pra diminuir o tempo de exibição do div de .succes e .error
+    it.only('Executando clock e tick pra otimizacao de tempo de resposta do .sucess e .error', function() {
+
+        cy.clock()
+
+        //Pega o campo com o input = firstname e grava o type informado 'Thadeu First'
+        cy.get('#firstName').type('Thadeu First')
+        //Pega o campo com o input = lastname e grava o type informado 'Thadeu'
+        cy.get('#lastName').type('Thadeu')
+        //Pega o campo com o input = email e grava o type informado 'thadeu_mestermin@hotmail.com'
+        cy.get('#email').type('thadeu_mestermin@hotmail.com')
+        //Pega o campo com o input = open-text-area e grava o type informado 'Teste texto'
+        cy.get('#open-text-area').type('Teste texto', { delay:0 })
+        //Executa a funcao de Click usando a opcao de Contains onde voce pega o Nome do Button como referencia
+        cy.contains('button', 'Enviar').click()
+        //Executa a funcao de Click usando a opcao de Get onde pega o button[type=submit} como referencia
+        //cy.get('button[type="submit"]').click()
+        
+        //Verifica se apos o preenchimento e o click no botao, se foi retornado uma class de Sucesso.
+        cy.get('.success').should('be.visible')
+        cy.tick(30000)
+        cy.get('.success').should('not.be.visible')
+    })
+
   })
   
