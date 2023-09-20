@@ -167,7 +167,7 @@ cy.excheckconfirmafeedback()
       })
 
       //Usando a funcao clock e tick pra diminuir o tempo de exibição do div de .succes e .error
-    it.only('Executando clock e tick pra otimizacao de tempo de resposta do .sucess e .error', function() {
+    it('Executando clock e tick pra otimizacao de tempo de resposta do .sucess e .error', function() {
 
         cy.clock()
 
